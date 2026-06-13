@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rec-League Swing Scorecard</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#555; --line:#bbb; --accent:#1d4e89; --bg:#fff; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#f2f2f2; color:var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px; line-height: 1.4; }
+  .sheet { background:var(--bg); width: 8.5in; min-height: 11in; margin: 16px auto;
+    padding: 0.55in 0.6in; box-shadow: 0 1px 6px rgba(0,0,0,.15); }
+  h1 { font-size: 24px; margin: 0 0 2px; color: var(--accent); }
+  h2 { font-size: 16px; margin: 22px 0 8px; color: var(--accent);
+    border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; color:#fff; background:var(--accent);
+    padding:2px 7px; border-radius:3px; vertical-align:middle; }
+  .sub { color: var(--muted); font-size: 12.5px; margin: 2px 0 0; }
+
+  /* top fill-in row */
+  .meta { display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; }
+  .meta .field { flex:1 1 160px; }
+  .meta label { display:block; font-size:11px; text-transform:uppercase;
+    letter-spacing:.04em; color:var(--muted); margin-bottom:2px; }
+  .blank { border:none; border-bottom:1px solid var(--line); width:100%;
+    font:inherit; padding:3px 2px; background:transparent; }
+
+  .note { background:#f7f9fc; border:1px solid #dfe7f2; border-radius:5px;
+    padding:9px 12px; font-size:12.5px; color:#33455e; margin:12px 0; }
+  .note b { color: var(--accent); }
+
+  table { width:100%; border-collapse:collapse; margin-top:6px; }
+  th, td { border:1px solid var(--line); padding:7px 8px; vertical-align:top; text-align:left; }
+  th { background:#eef2f8; font-size:11px; text-transform:uppercase;
+    letter-spacing:.03em; color:#33455e; }
+  td .killer { font-weight:700; }
+  td .look { font-size:12px; color:var(--muted); margin-top:3px; }
+  .angle { font-size:11px; font-weight:700; color:var(--accent);
+    white-space:nowrap; }
+  .scorecell { text-align:center; white-space:nowrap; }
+  .box { display:inline-block; width:14px; height:14px; border:1.5px solid #666;
+    border-radius:3px; vertical-align:-2px; margin-right:4px; }
+  .opt { display:block; font-size:12px; margin:2px 0; white-space:nowrap; text-align:left; }
+  .notesline { min-width:120px; }
+
+  .summary { margin-top:18px; }
+  .summary .row { margin:12px 0; }
+  .summary .lbl { font-weight:700; font-size:13px; }
+  .ln { border-bottom:1px solid var(--line); height:20px; margin-top:4px; }
+
+  /* reference page */
+  .ref h3 { font-size:14px; margin:14px 0 3px; color:var(--ink); }
+  .ref .cue { font-style:italic; color:var(--accent); }
+  .ref p { margin:3px 0; font-size:13px; }
+  .ref .drills { color:var(--muted); font-size:12.5px; }
+  .footer { margin-top:20px; font-size:11px; color:#888; text-align:center; }
+
+  .print-hint { max-width:8.5in; margin:14px auto 0; text-align:center;
+    font-size:13px; color:#444; }
+  .print-hint button { font:inherit; padding:8px 16px; border:0; border-radius:6px;
+    background:var(--accent); color:#fff; cursor:pointer; }
+
+  @media print {
+    html, body { background:#fff; font-size:12px; }
+    .sheet { box-shadow:none; margin:0; width:auto; min-height:auto; padding:0.4in 0.5in; }
+    .print-hint { display:none; }
+    .pagebreak { page-break-before: always; }
+  }
+  @page { size: letter; margin: 0.5in; }
+</style>
+</head>
+<body>
+
+<div class="print-hint">
+  Fill it in on screen, or <button onclick="window.print()">Print / Save as PDF</button>
+  &nbsp;— print blank copies to mark by hand at the field.
+</div>
+
+<!-- ============ PAGE 1: SCORECARD ============ -->
+<div class="sheet">
+  <h1>Rec-League Swing Scorecard <span class="tag">v0 · manual</span></h1>
+  <p class="sub">Watch the swing video, mark what you see, then hand the hitter 1–3 things to work on.</p>
+
+  <div class="meta">
+    <div class="field"><label>Hitter</label><input class="blank" type="text"></div>
+    <div class="field"><label>Date</label><input class="blank" type="text"></div>
+    <div class="field"><label>Filmed / scored by</label><input class="blank" type="text"></div>
+  </div>
+
+  <div class="note">
+    <b>Film it right first.</b> Two angles if you can — <b>face-on</b> (phone ~15 ft to the
+    side, hip height) and <b>behind</b> (catcher's view). Whole body + bat in frame, slow-mo
+    ON. If the body and bat aren't clearly visible, don't score it — refilm.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:38%">Swing-killer &amp; what to look for</th>
+        <th style="width:13%">Best angle</th>
+        <th style="width:24%">Score</th>
+        <th style="width:25%">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="killer">1. Lunging / drifting</span>
+          <div class="look">Head &amp; weight slide toward the pitcher early. More than ~a head's-width of forward drift = problem.</div></td>
+        <td><span class="angle">Face-on</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+      <tr>
+        <td><span class="killer">2. Casting / bat drag</span>
+          <div class="look">Hands push out wide instead of knob-to-the-ball. Cast-first = problem. ("Always late on the fastball.")</div></td>
+        <td><span class="angle">Behind</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+      <tr>
+        <td><span class="killer">3. Pulling off / flying open</span>
+          <div class="look">Front shoulder &amp; head bail toward the dugout early. Front shoulder already open at launch = problem.</div></td>
+        <td><span class="angle">Face-on</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+      <tr>
+        <td><span class="killer">4. No load / no separation</span>
+          <div class="look">Starts dead-still and arms the ball. No gather/coil, no hands-back as the foot lands = problem.</div></td>
+        <td><span class="angle">Face-on</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+      <tr>
+        <td><span class="killer">5. Stepping in the bucket</span>
+          <div class="look">Stride foot lands toward the dugout, not the pitcher. Pointing at the dugout = problem.</div></td>
+        <td><span class="angle">Behind</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+      <tr>
+        <td><span class="killer">6. Steep / long bat path</span>
+          <div class="look">Barrel chops steeply down or loops way uphill instead of matching the pitch plane. Steep either way = problem.</div></td>
+        <td><span class="angle">Behind</span></td>
+        <td class="scorecell">
+          <span class="opt"><span class="box"></span>OK</span>
+          <span class="opt"><span class="box"></span>Minor</span>
+          <span class="opt"><span class="box"></span>Major</span></td>
+        <td class="notesline"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <div class="row">
+      <span class="lbl">Top 1–3 to work on</span>
+      <span style="color:var(--muted);font-size:12px;"> (only the biggest Majors — don't dump all six)</span>
+      <div class="ln"></div><div class="ln"></div>
+    </div>
+    <div class="row">
+      <span class="lbl">Drills assigned</span>
+      <div class="ln"></div><div class="ln"></div>
+    </div>
+    <div class="row">
+      <span class="lbl">Refilm by</span>
+      <div class="ln" style="max-width:240px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2: COACHING REFERENCE ============ -->
+<div class="sheet pagebreak ref">
+  <h1>Coaching reference</h1>
+  <p class="sub">The cue to say and a drill or two for each killer. Give one thing at a time.</p>
+
+  <h3>1. Lunging / drifting <span class="angle">· Face-on</span></h3>
+  <p class="cue">"Stay back — let it come to you. Turn, don't lunge."</p>
+  <p class="drills">Drills: fence/wall stride-and-hold · tee work with weight held back · one-handed top-hand tee.</p>
+
+  <h3>2. Casting / bat drag <span class="angle">· Behind</span></h3>
+  <p class="cue">"Knob to the ball. Keep your hands inside."</p>
+  <p class="drills">Drills: towel/connection-ball pinned under lead armpit · inside-pitch tee · two-tee drill (don't clip the outer tee).</p>
+
+  <h3>3. Pulling off / flying open <span class="angle">· Face-on</span></h3>
+  <p class="cue">"Stay closed, see it deep, hit it back up the middle."</p>
+  <p class="drills">Drills: opposite-field tee/soft-toss · contact point set deeper · "show the logo" — chest closed until the hands go.</p>
+
+  <h3>4. No load / no separation <span class="angle">· Face-on</span></h3>
+  <p class="cue">"Get a rhythm, gather, then go. Hips lead, hands follow."</p>
+  <p class="drills">Drills: toe-tap / small leg-kick timing · "hands back as foot goes down" reps · hip-turn-first dry swings.</p>
+
+  <h3>5. Stepping in the bucket <span class="angle">· Behind / Face-on</span></h3>
+  <p class="cue">"Stride to the pitcher, not away from it."</p>
+  <p class="drills">Drills: stride into a bat laid on the ground as a guide · closed-toe stride vs. a wall · slow walk-up swings toward the mound.</p>
+
+  <h3>6. Steep / long bat path <span class="angle">· Behind</span></h3>
+  <p class="cue">"Match the plane. Stay through the zone, not down or up at it."</p>
+  <p class="drills">Drills: two-tee path drill (low back tee, higher front tee) · high-tee/low-tee mix · bottom-hand-only path reps.</p>
+
+  <div class="note" style="margin-top:18px">
+    <b>How to use it:</b> score each killer OK / Minor / Major → pick the top 1–3 Majors only →
+    tell the hitter what you saw + the cue + one drill → refilm in 2–3 weeks and re-score.
+    Did it move? That's your proof. Honest caveat: these are rough, widely-taught fundamentals,
+    not gospel — trust your eyes and catch the big, obvious stuff.
+  </div>
+
+  <div class="footer">Rec-League Swing Scorecard · manual v0 · catch the big, obvious swing-killers</div>
+</div>
+
+</body>
+</html>
